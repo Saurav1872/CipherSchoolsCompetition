@@ -1,7 +1,9 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 bool checkTriplet(int arr[], int size) {
+    sort(arr, arr + size);
     for (int i = 0; i < size - 2; ++i) {
         int l = i + 1;
         int r = size - 1;
