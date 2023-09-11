@@ -32,8 +32,7 @@ void append(Node *&head, int val) {
         current->next = newNode;
     }
 }
-void printLinkedList(Node *head)
-{
+void printLinkedList(Node *head) {
     Node *current = head;
     while (current) {
         cout << current->val << " ";
