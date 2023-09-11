@@ -6,7 +6,7 @@ struct Node {
     Node *next;
     Node(int x) : val(x), next(nullptr) {}
 };
-int pairSum(Node *head) {
+int twinPairSum(Node *head) {
     int res = 0;
     vector<int> arr;
     while (head->next != NULL) {
@@ -32,7 +32,8 @@ void append(Node *&head, int val) {
         current->next = newNode;
     }
 }
-void printLinkedList(Node *head) {
+void printLinkedList(Node *head)
+{
     Node *current = head;
     while (current) {
         cout << current->val << " ";
@@ -52,6 +53,6 @@ int main() {
         append(head, val);
     }
     cout << "Output: " << endl;
-    cout << pairSum(head) << endl;
+    cout << twinPairSum(head) << endl;
     return 0;
 }
