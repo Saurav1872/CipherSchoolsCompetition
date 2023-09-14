@@ -7,31 +7,32 @@ struct Node
     Node(int x) : val(x), next(nullptr) {}
 };
 
-Node *rotate(Node *head, int k)
-{
-    if (!head || !head->next || !k)
-    {
-        return head;
-    }
-    Node *curr = head;
-    int len = 1;
-    while (curr->next)
-    {
-        curr = curr->next;
-        ++len;
-    }
-    curr->next = head;
-    k = k % len;
-    k = len - k;
-    while (k--)
-    {
-        curr = curr->next;
-    }
-    head = curr->next;
-    curr->next = NULL;
+Node* reverseKGroup(Node* head, int k) {
+        int size = 0;
+        Node* ptr = head;\
+        while(ptr) {
+            size++;
+            ptr = ptr->next;
+        }
+        if(size < k) {
+            return head;
+        }
+        Node* prev = NULL;
+        Node* temp = head;
+        int i = 0;
 
-    return head;
-}
+        while(temp != NULL && i < k ) {
+            Node* next = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = next;
+            i++;
+        }
+        if(temp != NULL) {
+            head->next = reverseKGroup(temp,k);
+        }
+        return prev;
+    }
 
 void append(Node *&head, int val)
 {
@@ -76,7 +77,7 @@ int main()
     int k;
     cin >> k;
     cout << "Output: " << endl;
-    head = rotate(head, k);
+    head = reverseKGroup(head, k);
     printLinkedList(head);
     return 0;
 }
