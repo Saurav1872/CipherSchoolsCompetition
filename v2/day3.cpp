@@ -8,24 +8,29 @@ struct Node
     Node(int x) : val(x), next(nullptr) {}
 };
 
-Node *oddEvenList(Node *head)
+Node *rotate(Node *head, int k)
 {
-    if (!head)
-        return NULL;
-    if (!head->next)
-        return head;
-
-    Node *odd = head, *even = head->next;
-    Node *node = head->next;
-
-    while (odd->next != NULL && even->next != NULL)
+    if (!head || !head->next || !k)
     {
-        odd->next = even->next;
-        odd = odd->next;
-        even->next = odd->next;
-        even = even->next;
+        return head;
     }
-    odd->next = node;
+    Node *curr = head;
+    int len = 1;
+    while (curr->next)
+    {
+        curr = curr->next;
+        ++len;
+    }
+    curr->next = head;
+    k = k % len;
+    k = len - k;
+    while (k--)
+    {
+        curr = curr->next;
+    }
+    head = curr->next;
+    curr->next = NULL;
+
     return head;
 }
 
@@ -69,8 +74,10 @@ int main()
         cin >> val;
         append(head, val);
     }
+    int k;
+    cin >> k;
     cout << "Output: " << endl;
-    oddEvenList(head);
+    head = rotate(head, k);
     printLinkedList(head);
     return 0;
 }
