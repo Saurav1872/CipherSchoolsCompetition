@@ -7,32 +7,37 @@ struct Node
     Node(int x) : val(x), next(nullptr) {}
 };
 
-Node* reverseKGroup(Node* head, int k) {
-        int size = 0;
-        Node* ptr = head;\
-        while(ptr) {
-            size++;
-            ptr = ptr->next;
-        }
-        if(size < k) {
-            return head;
-        }
-        Node* prev = NULL;
-        Node* temp = head;
-        int i = 0;
-
-        while(temp != NULL && i < k ) {
-            Node* next = temp->next;
-            temp->next = prev;
-            prev = temp;
-            temp = next;
-            i++;
-        }
-        if(temp != NULL) {
-            head->next = reverseKGroup(temp,k);
-        }
-        return prev;
+Node *reverseKGroup(Node *head, int k)
+{
+    int size = 0;
+    Node *ptr = head;
+    while (ptr)
+    {
+        size++;
+        ptr = ptr->next;
     }
+    if (size < k)
+    {
+        return head;
+    }
+    Node *prev = NULL;
+    Node *temp = head;
+    int i = 0;
+
+    while (temp != NULL && i < k)
+    {
+        Node *next = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = next;
+        i++;
+    }
+    if (temp != NULL)
+    {
+        head->next = reverseKGroup(temp, k);
+    }
+    return prev;
+}
 
 void append(Node *&head, int val)
 {
